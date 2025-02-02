@@ -3,6 +3,7 @@
 import React, { Suspense } from 'react'
 import { AuthForm } from '../../../components/auth/AuthForm'
 import { useSearchParams } from 'next/navigation'
+import { Analytics } from '@vercel/analytics/react'
 
 function SignupComponent() {
   const searchParams = useSearchParams()
@@ -29,8 +30,11 @@ function SignupComponent() {
 
 export default function SignupPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <SignupComponent />
-    </Suspense>
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <SignupComponent />
+      </Suspense>
+      <Analytics />
+    </>
   )
 }

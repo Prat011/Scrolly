@@ -4,7 +4,7 @@ import { PdfViewer } from '../../../components/pdf-viewer/PdfViewer'
 import { useEffect, useState } from 'react'
 import { supabase } from '../../../lib/supabase/supabase'
 import { useRouter } from 'next/navigation'
-
+import { Analytics } from '@vercel/analytics/react'
 export default function DashboardPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
