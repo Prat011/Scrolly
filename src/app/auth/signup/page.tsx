@@ -1,9 +1,10 @@
 'use client'
 
+import React, { Suspense } from 'react'
 import { AuthForm } from '../../../components/auth/AuthForm'
 import { useSearchParams } from 'next/navigation'
 
-export default function SignUp() {
+function SignupComponent() {
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
 
@@ -23,5 +24,13 @@ export default function SignUp() {
 
         </div>
       </div>
+  )
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignupComponent />
+    </Suspense>
   )
 }
