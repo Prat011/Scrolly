@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigation } from './Navigation';
 import { ContextPanel } from './ContextPanel';
 import { Viewer, Worker, SpecialZoomLevel } from '@react-pdf-viewer/core';
@@ -13,6 +13,7 @@ import '../../styles/globals.css';
 import { Analytics } from '@vercel/analytics/react'
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import { useRouter } from 'next/navigation';
 
 export function PdfViewer() {
   const [selectedText, setSelectedText] = useState('');
@@ -20,6 +21,13 @@ export function PdfViewer() {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const zoomPluginInstance = zoomPlugin();
   const pageNavigationPluginInstance = pageNavigationPlugin();
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  const router = useRouter();
+
+
 
   const plugins = [
     defaultLayoutPluginInstance,
@@ -42,6 +50,16 @@ export function PdfViewer() {
     if (file) {
       const url = URL.createObjectURL(file);
       setPdfFile(url);
+    }
+  };
+
+  const handleLogout = async () => {
+    if (isMounted) {
+      // Clear authentication tokens or session data here
+      // For example: localStorage.removeItem('authToken');
+
+      // Redirect to login page using the App Router
+      router.push('/login');
     }
   };
 
