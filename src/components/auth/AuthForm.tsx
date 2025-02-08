@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase/supabase'
 import { FormEvent, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { RainbowButton } from '@/src/components/ui/rainbow-button'
+import { StarBorder } from '@/src/components/ui/star-border'
 
 interface AuthFormProps {
   mode?: 'login' | 'signup';
@@ -147,7 +148,7 @@ export function AuthForm({ mode = 'login', checkSession = true }: AuthFormProps)
       
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-300 font-['Instrument_Serif']">
             Email
           </label>
           <input
@@ -155,14 +156,14 @@ export function AuthForm({ mode = 'login', checkSession = true }: AuthFormProps)
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 bg-white/10 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white placeholder-gray-400 transition duration-200"
+            className="w-full px-4 py-2 bg-white/10 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white placeholder-gray-400 transition duration-200 font-['Instrument_Serif']"
             placeholder="you@example.com"
             required
           />
         </div>
         
         <div className="space-y-2">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+          <label htmlFor="password" className="block text-sm font-medium text-gray-300 font-['Instrument_Serif']">
             Password
           </label>
           <input
@@ -170,20 +171,21 @@ export function AuthForm({ mode = 'login', checkSession = true }: AuthFormProps)
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 bg-white/10 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white placeholder-gray-400 transition duration-200"
+            className="w-full px-4 py-2 bg-white/10 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white placeholder-gray-400 transition duration-200 font-['Instrument_Serif']"
             placeholder="••••••••"
             required
           />
         </div>
 
-        <RainbowButton
+        <StarBorder
           type="submit"
-          className="w-full relative group"
+          className="w-full"
           disabled={isLoading}
         >
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-          {isLoading ? 'Loading...' : (isSignUp ? 'Sign Up' : 'Sign In')}
-        </RainbowButton>
+          <span className="text-lg font-['Instrument_Serif']">
+            {isLoading ? 'Loading...' : (isSignUp ? 'Sign Up' : 'Sign In')}
+          </span>
+        </StarBorder>
 
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
@@ -197,17 +199,17 @@ export function AuthForm({ mode = 'login', checkSession = true }: AuthFormProps)
         <button
           type="button"
           onClick={() => setIsSignUp(!isSignUp)}
-          className="w-full text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-white/80 via-white/80 to-white/80 bg-clip-text text-transparent hover:opacity-80"
+          className="w-full text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-white/80 via-white/80 to-white/80 bg-clip-text text-transparent hover:opacity-80 font-['Instrument_Serif']"
         >
           {isSignUp ? (
             <>
               <span>Already have an account?</span>
-              <span className="font-semibold">Sign In →</span>
+              <span className="font-semibold font-['Instrument_Serif']">Sign In →</span>
             </>
           ) : (
             <>
               <span>Need an account?</span>
-              <span className="font-semibold">Sign Up →</span>
+              <span className="font-semibold font-['Instrument_Serif']">Sign Up →</span>
             </>
           )}
         </button>

@@ -4,6 +4,8 @@ import { Card, CardContent } from '../ui/card'
 import { MessageSquare, Send } from 'lucide-react'
 import { RainbowButton } from '../ui/rainbow-button'
 import ReactMarkdown from 'react-markdown'
+import { cn } from '../../lib/utils'
+import { Star } from 'lucide-react'
 
 interface DiscussionProps {
   selectedText: string
@@ -48,12 +50,22 @@ export function Discussion({ selectedText }: DiscussionProps) {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full font-['Instrument_Serif']">
       <div className="flex-1 overflow-y-auto p-4">
         <div className="space-y-4">
           {messages.map((msg, idx) => (
-            <Card key={idx}>
-              <CardContent className="pt-4 prose prose-sm dark:prose-invert max-w-none">
+            <Card key={idx} className={cn(
+              "border",
+              msg.role === 'user' 
+                ? "bg-blue-950/80 border-blue-800/50" 
+                : "bg-zinc-900/90 border-purple-800/40"
+            )}>
+              <CardContent className={cn(
+                "pt-4 prose prose-sm dark:prose-invert max-w-none",
+                msg.role === 'user'
+                  ? "text-blue-100 text-sm"
+                  : "text-purple-100 text-base font-['Instrument_Serif']"
+              )}>
                 <ReactMarkdown>{msg.content}</ReactMarkdown>
               </CardContent>
             </Card>
@@ -61,17 +73,27 @@ export function Discussion({ selectedText }: DiscussionProps) {
         </div>
       </div>
 
-      <div className="border-t bg-slate-50 p-4">
+      <div className="border-t border-gray-800  p-4">
         <div className="flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit();
+              }
+            }}
             placeholder="Ask about the text..."
-            className="flex-1 p-2 border rounded-md"
+            className="flex-1 p-2 border rounded-md bg-black/60 border-gray-700 text-white font-['Instrument_Serif'] placeholder:text-white-500"
             disabled={isLoading}
           />
-          <RainbowButton onClick={handleSubmit} disabled={isLoading}>
+          <RainbowButton 
+            onClick={handleSubmit} 
+            disabled={isLoading}
+            className="p-2 rounded-md bg-black/60 border border-black-900 hover:bg-white/40 disabled:opacity-50"
+          >
             <Send className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
           </RainbowButton>
         </div>

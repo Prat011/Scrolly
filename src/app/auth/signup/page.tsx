@@ -4,6 +4,7 @@ import React, { Suspense } from 'react'
 import { AuthForm } from '../../../components/auth/AuthForm'
 import { useSearchParams } from 'next/navigation'
 import { Analytics } from '@vercel/analytics/react'
+import { StarBorder } from '@/src/components/ui/star-border'
 
 function SignupComponent() {
   const searchParams = useSearchParams()
@@ -12,6 +13,10 @@ function SignupComponent() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
+        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-white via-white to-white text-transparent bg-clip-text font-['Instrument_Serif']">
+          Create Account
+        </h1>
+        
         {error && (
           <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-400 text-sm rounded-lg backdrop-blur-sm">
             {error === 'auth_failed' && 'Authentication failed. Please try again.'}
@@ -20,11 +25,9 @@ function SignupComponent() {
           </div>
         )}
 
-          <AuthForm mode="signup" checkSession={false} />
-          
-
-        </div>
+        <AuthForm mode="signup" checkSession={false} />
       </div>
+    </div>
   )
 }
 

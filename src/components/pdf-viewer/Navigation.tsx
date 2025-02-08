@@ -1,30 +1,26 @@
 import { Book, Brain, MessageSquare, Settings, ChevronLeft, ChevronRight, LogOut } from 'lucide-react'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
+import { supabase } from '../../lib/supabase/supabase'
 
 export function Navigation() {
   const router = useRouter()
 
   const handleLogout = async () => {
-    // Clear authentication tokens or session data here
-    // For example: localStorage.removeItem('authToken')
-    router.push('/login')
+    try {
+      const { error } = await supabase.auth.signOut()
+      if (error) {
+        console.error('Error signing out:', error)
+        return
+      }
+      window.location.href = '/auth/login'
+    } catch (error) {
+      console.error('Unexpected error during logout:', error)
+    }
   }
 
   return (
     <div className="w-16 bg-black p-4 flex flex-col items-center space-y-8">
-      <Button variant="ghost" size="icon" className="text-slate-200">
-        <Book className="h-6 w-6" />
-      </Button>
-      <Button variant="ghost" size="icon" className="text-slate-200">
-        <Brain className="h-6 w-6" />
-      </Button>
-      <Button variant="ghost" size="icon" className="text-slate-200">
-        <MessageSquare className="h-6 w-6" />
-      </Button>
-      <Button variant="ghost" size="icon" className="text-slate-200">
-        <Settings className="h-6 w-6" />
-      </Button>
       <div className="absolute bottom-4 w-16 flex justify-center">
         <button
           onClick={handleLogout}

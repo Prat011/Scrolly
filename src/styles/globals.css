@@ -1,5 +1,6 @@
 @import '@react-pdf-viewer/core/lib/styles/index.css';
 @import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -77,4 +78,8 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.font-instrument {
+  font-family: 'Instrument Serif', serif;
 }

@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 export function PdfViewer() {
   const [selectedText, setSelectedText] = useState('');
   const [pdfFile, setPdfFile] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const zoomPluginInstance = zoomPlugin();
   const pageNavigationPluginInstance = pageNavigationPlugin();
@@ -45,11 +46,18 @@ export function PdfViewer() {
     }
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const url = URL.createObjectURL(file);
-      setPdfFile(url);
+      setIsLoading(true);
+      try {
+        const url = URL.createObjectURL(file);
+        setPdfFile(url);
+      } catch (error) {
+        console.error('Error loading PDF:', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -76,14 +84,24 @@ export function PdfViewer() {
             {!pdfFile ? (
               <div className="h-full flex items-center justify-center bg-black">
                 <RainbowButton className="animate-rainbow-border">
-                  <label className="cursor-pointer text-white">
-                    Upload PDF
-                    <input
-                      type="file"
-                      accept="application/pdf"
-                      onChange={handleFileUpload}
-                      className="hidden"
-                    />
+                  <label className="cursor-pointer text-white font-['Instrument_Serif'] relative">
+                    {isLoading ? (
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Loading PDF...</span>
+                      </div>
+                    ) : (
+                      <>
+                        Upload PDF
+                        <input
+                          type="file"
+                          accept="application/pdf"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                          disabled={isLoading}
+                        />
+                      </>
+                    )}
                   </label>
                 </RainbowButton>
               </div>

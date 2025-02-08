@@ -3,7 +3,7 @@
 
 import { supabase } from '../../../lib/supabase/supabase'
 import { useState } from 'react'
-import { RainbowButton } from '@/src/components/ui/rainbow-button'
+import { StarBorder } from '@/src/components/ui/star-border'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -34,7 +34,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
-        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-white-900 via-white-900 to-white-900 text-transparent bg-clip-text">
+        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-white via-white to-white text-transparent bg-clip-text font-['Instrument_Serif']">
+          Welcome Back
         </h1>
         
         <div className="w-full p-8 bg-white/5 backdrop-blur-sm rounded-xl shadow-xl space-y-6">
@@ -46,7 +47,7 @@ export default function LoginPage() {
           
           <form onSubmit={handleLogin} className="space-y-6">
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 font-['Instrument_Serif']">
                 Email
               </label>
               <input
@@ -54,13 +55,13 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full px-4 py-2 bg-white/10 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white placeholder-gray-400 transition duration-200"
+                className="w-full px-4 py-2 bg-white/10 border border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white placeholder-gray-400 transition duration-200 font-['Instrument_Serif']"
                 required
               />
             </div>
             
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 font-['Instrument_Serif']">
                 Password
               </label>
               <input
@@ -73,14 +74,9 @@ export default function LoginPage() {
               />
             </div>
             
-            <RainbowButton 
-              type="submit" 
-              className="w-full relative group"
-              disabled={loading}
-            >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                  {loading ? 'Loading...' : 'Sign In'}
-            </RainbowButton>
+            <StarBorder type="submit" className="w-full" disabled={loading}>
+              <span className="text-lg font-['Instrument_Serif']">{loading ? 'Loading...' : 'Sign In'}</span>
+            </StarBorder>
 
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
@@ -91,14 +87,13 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <button
+            <StarBorder
               type="button"
               onClick={() => window.location.href = '/auth/signup'}
-              className="w-full text-sm text-gray-300 hover:text-white font-medium transition-colors duration-200 flex items-center justify-center gap-2"
+              className="w-full"
             >
-              <span>Need an account?</span>
-              <span className="font-semibold">Sign Up →</span>
-            </button>
+              <span className="text-lg font-['Instrument_Serif']">Need an account? Sign Up →</span>
+            </StarBorder>
           </form>
         </div>
       </div>

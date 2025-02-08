@@ -6,8 +6,8 @@ import { Toaster } from '../components/ui/toaster'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Premium PDF Reader',
-  description: 'AI-powered PDF reading experience',
+  title: 'Scrolly',
+  description: 'Reading on your device should be much simpler and better',
 }
 
 export default function RootLayout({

@@ -77,7 +77,10 @@ export default {
   		backgroundImage: {
   			'grid-pattern': 'url("/grid-pattern.svg")',
   			'grid-pattern-light': 'url("/grid-pattern-light.svg")'
-  		}
+  		},
+  		fontFamily: {
+  			serif: ['Instrument Serif', 'serif'],
+  		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
