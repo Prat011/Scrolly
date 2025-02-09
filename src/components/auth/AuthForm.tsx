@@ -81,9 +81,7 @@ export function AuthForm({ mode = 'login', checkSession = true }: AuthFormProps)
     setIsSignUp(mode === 'signup')
   }, [mode])
 
-  const redirectUrl = process.env.NEXT_PUBLIC_VERCEL_URL 
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/supabase`
-    : `${origin}/api/auth/supabase`
+  const redirectUrl = `https://readscrolly.vercel.app/auth/login`
 
   const handleSignUp = async (email: string, password: string) => {
     try {
