@@ -83,12 +83,11 @@ export function AuthForm({ mode = 'login', checkSession = true }: AuthFormProps)
 
   const handleSignUp = async (email: string, password: string) => {
     try {
-      const redirectUrl = process.env.NEXT_PUBLIC_REDIRECT_URL || `${origin}/auth/verify`;
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: redirectUrl,
+          emailRedirectTo: `${origin}/api/auth/supabase`,
         },
       })
 
@@ -175,6 +174,7 @@ export function AuthForm({ mode = 'login', checkSession = true }: AuthFormProps)
             placeholder="••••••••"
             required
           />
+          <p className="text-xs text-gray-400 font-['Instrument_Serif']">Password must be at least 6 characters long</p>
         </div>
 
         <StarBorder

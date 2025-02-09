@@ -4,12 +4,14 @@
 import { supabase } from '../../../lib/supabase/supabase'
 import { useState } from 'react'
 import { StarBorder } from '@/src/components/ui/star-border'
+import { useSearchParams } from 'next/navigation'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const searchParams = useSearchParams()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,6 +39,12 @@ export default function LoginPage() {
         <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-white via-white to-white text-transparent bg-clip-text font-['Instrument_Serif']">
           Welcome Back
         </h1>
+        
+        {searchParams.get('message') === 'verification_success' && (
+          <div className="p-4 bg-green-500/10 border border-green-500/20 text-green-400 text-sm rounded-lg backdrop-blur-sm">
+            Email verified successfully! Please log in with your credentials.
+          </div>
+        )}
         
         <div className="w-full p-8 bg-white/5 backdrop-blur-sm rounded-xl shadow-xl space-y-6">
           {error && (
