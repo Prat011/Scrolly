@@ -81,13 +81,17 @@ export function AuthForm({ mode = 'login', checkSession = true }: AuthFormProps)
     setIsSignUp(mode === 'signup')
   }, [mode])
 
+  const redirectUrl = process.env.NEXT_PUBLIC_VERCEL_URL 
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/auth/supabase`
+    : `${origin}/api/auth/supabase`
+
   const handleSignUp = async (email: string, password: string) => {
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: `${origin}/api/auth/supabase`,
+          emailRedirectTo: redirectUrl,
         },
       })
 
