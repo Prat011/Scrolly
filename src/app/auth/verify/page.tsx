@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect } from 'react'
+import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { StarBorder } from '@/src/components/ui/star-border'
 
-export default function VerifyPage() {
+function VerifyComponent() {
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
 
@@ -36,5 +36,13 @@ export default function VerifyPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyComponent />
+    </Suspense>
   )
 }

@@ -4,7 +4,6 @@ import React, { Suspense } from 'react'
 import { AuthForm } from '../../../components/auth/AuthForm'
 import { useSearchParams } from 'next/navigation'
 import { Analytics } from '@vercel/analytics/react'
-import { StarBorder } from '@/src/components/ui/star-border'
 
 function SignupComponent() {
   const searchParams = useSearchParams()
@@ -33,11 +32,9 @@ function SignupComponent() {
 
 export default function SignupPage() {
   return (
-    <>
-      <Suspense fallback={<div>Loading...</div>}>
-        <SignupComponent />
-      </Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignupComponent />
       <Analytics />
-    </>
+    </Suspense>
   )
 }
