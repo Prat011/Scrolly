@@ -1,7 +1,7 @@
 "use client"
 
 import { supabase } from '../../lib/supabase/supabase'
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { RainbowButton } from '@/src/components/ui/rainbow-button'
 import { StarBorder } from '@/src/components/ui/star-border'
@@ -139,6 +139,16 @@ export function AuthForm({ mode = 'login', checkSession = true }: AuthFormProps)
     } else {
       await handleSignIn(email, password)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="w-full max-w-md mx-auto p-8 bg-black/80 backdrop-blur-sm rounded-xl shadow-xl">
+        <div className="flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+        </div>
+      </div>
+    )
   }
 
   return (
